@@ -1,11 +1,5 @@
-from fastapi import FastAPI
+import uvicorn
+from app.main import app
 
-app = FastAPI(title="To-Do List API")
-
-@app.get("/")
-async def root():
-    return {"message": "Chào mừng bạn đến với ứng dụng To-Do List!"}
-
-@app.get("/health")
-async def health_check():
-    return {"status": "ok"}
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
