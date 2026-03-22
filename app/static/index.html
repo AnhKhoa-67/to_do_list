@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-mode">
+    <div id="app">
+        <!-- Auth Screen -->
+        <section id="auth-screen" class="screen active">
+            <div class="glass-card login-card">
+                <h2>Welcome Back</h2>
+                <div id="auth-forms">
+                    <form id="login-form">
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="primary-btn">Login</button>
+                    </form>
+                    <p class="toggle-auth">Don't have an account? <span id="show-register">Register</span></p>
+                </div>
+                <div id="register-forms" style="display:none">
+                    <form id="register-form">
+                         <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="primary-btn">Register</button>
+                    </form>
+                    <p class="toggle-auth">Already have an account? <span id="show-login">Login</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <section id="dashboard" class="screen">
+            <aside class="sidebar glass-sidebar">
+                <div class="user-profile">
+                    <div class="avatar"><i class="fas fa-user-circle"></i></div>
+                    <span id="user-email">User</span>
+                </div>
+                <nav>
+                    <button class="nav-btn active" data-filter="all"><i class="fas fa-list"></i> All Tasks</button>
+                    <button class="nav-btn" data-filter="today"><i class="fas fa-calendar-day"></i> Today</button>
+                    <button class="nav-btn" data-filter="overdue"><i class="fas fa-clock"></i> Overdue</button>
+                    <button id="logout-btn" class="nav-btn logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </nav>
+            </aside>
+
+            <main class="content">
+                <header>
+                    <h1 id="view-title">All Tasks</h1>
+                    <button id="add-task-btn" class="add-btn"><i class="fas fa-plus"></i> New Task</button>
+                </header>
+
+                <div id="todo-list" class="todo-grid">
+                    <!-- Tasks will be injected here -->
+                </div>
+            </main>
+        </section>
+
+        <!-- Task Modal -->
+        <div id="task-modal" class="modal">
+            <div class="modal-content glass-card">
+                <h3 id="modal-title">Create New Task</h3>
+                <form id="task-form">
+                    <input type="hidden" id="task-id">
+                    <div class="input-group">
+                        <input type="text" id="task-title" placeholder="What needs to be done?" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="task-desc" placeholder="Details (optional)"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Due Date</label>
+                            <input type="datetime-local" id="task-due">
+                        </div>
+                        <div class="input-group">
+                            <label>Tags (comma separated)</label>
+                            <input type="text" id="task-tags" placeholder="urgent, work...">
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" id="close-modal" class="secondary-btn">Cancel</button>
+                        <button type="submit" class="primary-btn">Save Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
