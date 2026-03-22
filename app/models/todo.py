@@ -8,6 +8,7 @@ class Todo(SQLModel, table=True):
     title: str = Field(index=True, min_length=3, max_length=100)
     description: Optional[str] = Field(default=None)
     is_done: bool = Field(default=False)
+    is_deleted: bool = Field(default=False)
     due_date: Optional[datetime] = Field(default=None)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
