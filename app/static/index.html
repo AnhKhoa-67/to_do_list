@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium To-Do List</title>
+    <title>Danh Sách Công Việc Cao Cấp</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark-mode">
     <div id="app">
-        <!-- Auth Screen -->
+        <!-- Màn hình Xác thực -->
         <section id="auth-screen" class="screen active">
             <div class="glass-card login-card">
-                <h2>Welcome Back</h2>
+                <h2>Chào Mừng Quay Trở Lại</h2>
                 <div id="auth-forms">
                     <form id="login-form">
                         <div class="input-group">
@@ -22,11 +22,11 @@
                         </div>
                         <div class="input-group">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="login-password" placeholder="Password" required>
+                            <input type="password" id="login-password" placeholder="Mật khẩu" required>
                         </div>
-                        <button type="submit" class="primary-btn">Login</button>
+                        <button type="submit" class="primary-btn">Đăng nhập</button>
                     </form>
-                    <p class="toggle-auth">Don't have an account? <span id="show-register">Register</span></p>
+                    <p class="toggle-auth">Chưa có tài khoản? <span id="show-register">Đăng ký</span></p>
                 </div>
                 <div id="register-forms" style="display:none">
                     <form id="register-form">
@@ -36,34 +36,34 @@
                         </div>
                         <div class="input-group">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="register-password" placeholder="Password" required>
+                            <input type="password" id="register-password" placeholder="Mật khẩu" required>
                         </div>
-                        <button type="submit" class="primary-btn">Register</button>
+                        <button type="submit" class="primary-btn">Đăng ký</button>
                     </form>
-                    <p class="toggle-auth">Already have an account? <span id="show-login">Login</span></p>
+                    <p class="toggle-auth">Đã có tài khoản? <span id="show-login">Đăng nhập</span></p>
                 </div>
             </div>
         </section>
 
-        <!-- Main Dashboard -->
+        <!-- Dashboard Chính -->
         <section id="dashboard" class="screen">
             <aside class="sidebar glass-sidebar">
                 <div class="user-profile">
                     <div class="avatar"><i class="fas fa-user-circle"></i></div>
-                    <span id="user-email">User</span>
+                    <span id="user-email">Người dùng</span>
                 </div>
                 <nav>
-                    <button class="nav-btn active" data-filter="all"><i class="fas fa-list"></i> All Tasks</button>
-                    <button class="nav-btn" data-filter="today"><i class="fas fa-calendar-day"></i> Today</button>
-                    <button class="nav-btn" data-filter="overdue"><i class="fas fa-clock"></i> Overdue</button>
-                    <button id="logout-btn" class="nav-btn logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    <button class="nav-btn active" data-filter="all"><i class="fas fa-list"></i> Tất cả công việc</button>
+                    <button class="nav-btn" data-filter="today"><i class="fas fa-calendar-day"></i> Hôm nay</button>
+                    <button class="nav-btn" data-filter="overdue"><i class="fas fa-clock"></i> Quá hạn</button>
+                    <button id="logout-btn" class="nav-btn logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
                 </nav>
             </aside>
 
             <main class="content">
                 <header>
-                    <h1 id="view-title">All Tasks</h1>
-                    <button id="add-task-btn" class="add-btn"><i class="fas fa-plus"></i> New Task</button>
+                    <h1 id="view-title">Tất cả công việc</h1>
+                    <button id="add-task-btn" class="add-btn"><i class="fas fa-plus"></i> Thêm mới</button>
                 </header>
 
                 <div id="todo-list" class="todo-grid">
@@ -72,31 +72,31 @@
             </main>
         </section>
 
-        <!-- Task Modal -->
+        <!-- Modal Công việc -->
         <div id="task-modal" class="modal">
             <div class="modal-content glass-card">
-                <h3 id="modal-title">Create New Task</h3>
+                <h3 id="modal-title">Thêm công việc mới</h3>
                 <form id="task-form">
                     <input type="hidden" id="task-id">
                     <div class="input-group">
-                        <input type="text" id="task-title" placeholder="What needs to be done?" required>
+                        <input type="text" id="task-title" placeholder="Bạn cần làm gì?" required>
                     </div>
                     <div class="input-group">
-                        <textarea id="task-desc" placeholder="Details (optional)"></textarea>
+                        <textarea id="task-desc" placeholder="Mô tả chi tiết (tùy chọn)"></textarea>
                     </div>
                     <div class="form-row">
                         <div class="input-group">
-                            <label>Due Date</label>
+                            <label>Hạn chót</label>
                             <input type="datetime-local" id="task-due">
                         </div>
                         <div class="input-group">
-                            <label>Tags (comma separated)</label>
-                            <input type="text" id="task-tags" placeholder="urgent, work...">
+                            <label>Thẻ (cách nhau bởi dấu phẩy)</label>
+                            <input type="text" id="task-tags" placeholder="quan trọng, công việc...">
                         </div>
                     </div>
                     <div class="modal-actions">
-                        <button type="button" id="close-modal" class="secondary-btn">Cancel</button>
-                        <button type="submit" class="primary-btn">Save Task</button>
+                        <button type="button" id="close-modal" class="secondary-btn">Hủy</button>
+                        <button type="submit" class="primary-btn">Lưu công việc</button>
                     </div>
                 </form>
             </div>

@@ -31,7 +31,7 @@ async function login(email, password) {
             method: "POST",
             body: formData
         });
-        if (!resp.ok) throw new Error("Login failed");
+        if (!resp.ok) throw new Error("Đăng nhập thất bại");
         const data = await resp.json();
         currentToken = data.access_token;
         localStorage.setItem("token", currentToken);
@@ -49,8 +49,8 @@ async function register(email, password) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
-        if (!resp.ok) throw new Error("Registration failed");
-        alert("Registration successful! Please login.");
+        if (!resp.ok) throw new Error("Đăng ký thất bại");
+        alert("Đăng ký thành công! Vui lòng đăng nhập.");
         document.getElementById("show-login").click();
     } catch (err) {
         alert(err.message);
@@ -68,11 +68,11 @@ function logout() {
 function showDashboard() {
     authScreen.classList.remove("active");
     dashboard.classList.add("active");
-    userEmailSpan.textContent = localStorage.getItem("email") || "User";
+    userEmailSpan.textContent = localStorage.getItem("email") || "Người dùng";
     fetchTodos();
 }
 
-// --- Todo Functions ---
+// --- Các hàm cho Todo ---
 async function fetchTodos() {
     let url = `${API_BASE}/todos/`;
     if (currentFilter === "today") url = `${API_BASE}/todos/today`;
@@ -98,7 +98,7 @@ function renderTodos(todos) {
         
         const tagsHtml = todo.tags.map(t => `<span class="tag">${t.name}</span>`).join("");
         const isOverdue = todo.due_date && new Date(todo.due_date) < new Date() && !todo.is_done;
-        const dateHtml = todo.due_date ? new Date(todo.due_date).toLocaleString() : "No deadline";
+        const dateHtml = todo.due_date ? new Date(todo.due_date).toLocaleString('vi-VN') : "Không có hạn chót";
 
         card.innerHTML = `
             <div class="todo-header">
@@ -132,7 +132,7 @@ async function toggleDone(id, is_done) {
 }
 
 async function deleteTodo(id) {
-    if (!confirm("Are you sure?")) return;
+    if (!confirm("Bạn có chắc chắn muốn xóa công việc này?")) return;
     await fetch(`${API_BASE}/todos/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${currentToken}` }
@@ -140,7 +140,7 @@ async function deleteTodo(id) {
     fetchTodos();
 }
 
-// --- Event Listeners ---
+// --- Lắng nghe sự kiện ---
 loginForm.onsubmit = (e) => {
     e.preventDefault();
     login(document.getElementById("login-email").value, document.getElementById("login-password").value);
@@ -173,11 +173,11 @@ document.querySelectorAll(".nav-btn[data-filter]").forEach(btn => {
 
 document.getElementById("logout-btn").onclick = logout;
 
-// --- Modal Logic ---
+// --- Logic Modal ---
 document.getElementById("add-task-btn").onclick = () => {
     taskForm.reset();
     document.getElementById("task-id").value = "";
-    document.getElementById("modal-title").innerText = "Create New Task";
+    document.getElementById("modal-title").innerText = "Thêm công việc mới";
     taskModal.classList.add("active");
 };
 
@@ -193,7 +193,7 @@ window.openEditModal = (todo) => {
         document.getElementById("task-due").value = d.toISOString().slice(0, 16);
     }
     document.getElementById("task-tags").value = todo.tags.map(t => t.name).join(", ");
-    document.getElementById("modal-title").innerText = "Edit Task";
+    document.getElementById("modal-title").innerText = "Chỉnh sửa công việc";
     taskModal.classList.add("active");
 };
 
