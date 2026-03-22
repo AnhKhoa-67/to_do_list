@@ -8,6 +8,7 @@ from alembic import context
 # import SQLModel and models
 from sqlmodel import SQLModel
 from app.models.todo import Todo
+from app.models.user import User
 from app.core.db import sqlite_url
 
 # this is the Alembic Config object, which provides

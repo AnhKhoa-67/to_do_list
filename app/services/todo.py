@@ -6,9 +6,9 @@ from datetime import datetime
 
 class TodoService:
     @staticmethod
-    def get_all(session: Session, is_done: Optional[bool] = None, q: Optional[str] = None, 
-                limit: int = 10, offset: int = 0) -> List[Todo]:
-        statement = select(Todo)
+    def get_all(session: Session, owner_id: int, is_done: Optional[bool] = None, 
+                q: Optional[str] = None, limit: int = 10, offset: int = 0) -> List[Todo]:
+        statement = select(Todo).where(Todo.owner_id == owner_id)
         if is_done is not None:
             statement = statement.where(Todo.is_done == is_done)
         if q:
@@ -19,8 +19,9 @@ class TodoService:
         return results.all()
 
     @staticmethod
-    def get_total(session: Session, is_done: Optional[bool] = None, q: Optional[str] = None) -> int:
-        statement = select(func.count()).select_from(Todo)
+    def get_total(session: Session, owner_id: int, is_done: Optional[bool] = None, 
+                  q: Optional[str] = None) -> int:
+        statement = select(func.count()).select_from(Todo).where(Todo.owner_id == owner_id)
         if is_done is not None:
             statement = statement.where(Todo.is_done == is_done)
         if q:
@@ -33,8 +34,8 @@ class TodoService:
         return session.get(Todo, todo_id)
 
     @staticmethod
-    def create(session: Session, todo_in: TodoCreate) -> Todo:
-        db_todo = Todo.model_validate(todo_in)
+    def create(session: Session, todo_in: TodoCreate, owner_id: int) -> Todo:
+        db_todo = Todo.model_validate(todo_in, update={"owner_id": owner_id})
         session.add(db_todo)
         session.commit()
         session.refresh(db_todo)
